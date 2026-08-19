@@ -13,4 +13,8 @@ frontend/test-results/
 data/uploads/*
 !data/uploads/.gitkeep
 
+backend/data/receipt_reader.db
+backend/data/uploads/*
+!backend/data/uploads/.gitkeep
+
 .DS_Store
