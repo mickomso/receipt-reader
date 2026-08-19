@@ -27,7 +27,7 @@ Web application to read and validate Spanish supermarket receipts using computer
 
 ```bash
 # 1. Clone and enter the directory
-cd ticket-smart-comparator
+cd receipt-reader
 
 # 2. Copy environment variables
 cp .env.example .env
@@ -88,7 +88,7 @@ make test-frontend
 ## Project Structure
 
 ```
-ticket-smart-comparator/
+receipt-reader/
 ├── backend/
 │   ├── app/
 │   │   ├── domain/          # Pure domain models (no framework dependencies)
