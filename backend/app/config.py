@@ -22,7 +22,7 @@ class Settings(BaseSettings):
 
     # Application
     app_name: str = "Receipt Reader"
-    app_version: str = "0.1.0"
+    app_version: str = "0.0.1"
     debug: bool = False
 
     # Server
@@ -56,7 +56,9 @@ class Settings(BaseSettings):
     line_tolerance_eur: float = 0.01
 
     # CORS
-    cors_origins: list[str] = Field(default=["http://localhost:5173", "http://localhost:4173"])
+    cors_origins: list[str] = Field(
+        default=["http://localhost:5173", "http://localhost:4173"]
+    )
 
 
 settings = Settings()
