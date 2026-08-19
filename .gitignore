@@ -1,0 +1,15 @@
+.env
+.ruff_cache/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+frontend/node_modules/
+frontend/.svelte-kit/
+frontend/playwright-report/
+frontend/test-results/
+
+data/uploads/*
+!data/uploads/.gitkeep
+
+.DS_Store
