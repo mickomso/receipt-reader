@@ -1,19 +1,19 @@
 # Receipt Reader MVP
 
-Aplicación web para leer y validar tickets de supermercado españoles mediante visión por computadora con Google Gemini.
+Aplicación web para leer y validar tickets de supermercado españoles mediante visión por computadora con xAI Grok.
 
 ## Stack
 
-| Capa | Tecnología |
-|------|-----------|
-| Frontend | SvelteKit + TypeScript |
-| Backend | FastAPI + Python 3.13 |
-| IA | Gemini 1.5 Pro (LangChain) |
-| Workflow | LangGraph |
-| Validación | Pydantic v2 |
-| Base de datos | SQLite |
-| Tests backend | Pytest |
-| Tests frontend | Playwright |
+| Capa           | Tecnología             |
+| -------------- | ---------------------- |
+| Frontend       | SvelteKit + TypeScript |
+| Backend        | FastAPI + Python 3.13  |
+| IA             | Grok 4.5 (LangChain)   |
+| Workflow       | LangGraph              |
+| Validación     | Pydantic v2            |
+| Base de datos  | SQLite                 |
+| Tests backend  | Pytest                 |
+| Tests frontend | Playwright             |
 
 ## Instalación rápida
 
@@ -21,7 +21,7 @@ Aplicación web para leer y validar tickets de supermercado españoles mediante 
 
 - Python 3.12+ (probado con 3.13)
 - Node.js 20+
-- Clave de API de Google Gemini ([obtener aquí](https://aistudio.google.com/app/apikey))
+- Clave de API de xAI ([obtener aquí](https://console.x.ai/))
 
 ### Pasos
 
@@ -31,7 +31,8 @@ cd ticket-smart-comparator
 
 # 2. Copiar variables de entorno
 cp .env.example .env
-# Editar .env y poner tu GOOGLE_API_KEY
+# Editar .env y poner tu XAI_API_KEY
+# Asegúrate de usar EXTRACTOR_BACKEND=grok
 
 # 3. Instalar dependencias
 make install
@@ -50,7 +51,7 @@ make dev-frontend  # http://localhost:5173
 
 1. Abre `http://localhost:5173`
 2. Arrastra o selecciona una imagen de ticket (JPEG, PNG, WebP, máx. 10 MB)
-3. El sistema sube la imagen, la envía a Gemini y extrae los productos
+3. El sistema sube la imagen, la envía a Grok y extrae los productos
 4. Revisa la tabla de artículos y los totales
 5. Si hay discrepancias matemáticas, aparecerá una alerta
 6. Corrige los valores si es necesario y pulsa "Confirmar ticket"
@@ -61,15 +62,15 @@ Documentación interactiva disponible en `http://localhost:8000/docs`
 
 ### Endpoints
 
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| GET | `/health` | Estado del servicio |
-| POST | `/api/v1/receipts` | Subir imagen de ticket |
-| POST | `/api/v1/receipts/{id}/process` | Procesar con Gemini |
-| GET | `/api/v1/receipts` | Listar tickets |
-| GET | `/api/v1/receipts/{id}` | Detalle de ticket |
-| PATCH | `/api/v1/receipts/{id}` | Actualizar campos |
-| POST | `/api/v1/receipts/{id}/confirm` | Confirmar ticket |
+| Método | Ruta                            | Descripción            |
+| ------ | ------------------------------- | ---------------------- |
+| GET    | `/health`                       | Estado del servicio    |
+| POST   | `/api/v1/receipts`              | Subir imagen de ticket |
+| POST   | `/api/v1/receipts/{id}/process` | Procesar con Grok      |
+| GET    | `/api/v1/receipts`              | Listar tickets         |
+| GET    | `/api/v1/receipts/{id}`         | Detalle de ticket      |
+| PATCH  | `/api/v1/receipts/{id}`         | Actualizar campos      |
+| POST   | `/api/v1/receipts/{id}/confirm` | Confirmar ticket       |
 
 ## Tests
 
@@ -137,7 +138,7 @@ uploaded → processing → extracted → confirmed
    El estado del workflow se pierde al reiniciar el servidor. Para persistencia real,
    sustituir por `SqliteSaver` en `backend/app/workflow/graph.py`.
 
-2. **Procesamiento síncrono**: El endpoint `/process` bloquea hasta que Gemini responde
+2. **Procesamiento síncrono**: El endpoint `/process` bloquea hasta que Grok responde
    (~5-15 segundos). En producción, migrar a una cola de tareas (Celery, ARQ, etc.).
 
 3. **Sin autenticación**: MVP sin sistema de usuarios. No desplegar en producción sin añadir auth.
@@ -149,15 +150,16 @@ uploaded → processing → extracted → confirmed
 
 ## Variables de entorno
 
-| Variable | Descripción | Default |
-|----------|-------------|---------|
-| `GOOGLE_API_KEY` | Clave API de Google Gemini | (requerida) |
-| `GEMINI_MODEL` | Modelo a usar | `gemini-1.5-pro` |
-| `DATABASE_URL` | URL de SQLite | `sqlite:///./data/receipt_reader.db` |
-| `UPLOAD_DIR` | Directorio de uploads | `data/uploads` |
-| `MAX_UPLOAD_SIZE_BYTES` | Límite de tamaño | `10485760` (10 MB) |
-| `TOTALS_TOLERANCE_EUR` | Tolerancia en totales | `0.02` |
-| `LINE_TOLERANCE_EUR` | Tolerancia por línea | `0.01` |
+| Variable                | Descripción                               | Default                              |
+| ----------------------- | ----------------------------------------- | ------------------------------------ |
+| `XAI_API_KEY`           | Clave API de xAI                          | (requerida)                          |
+| `GROK_MODEL`            | Modelo a usar                             | `grok-4.5`                           |
+| `EXTRACTOR_BACKEND`     | Backend del extractor (`grok` o `gemini`) | `grok`                               |
+| `DATABASE_URL`          | URL de SQLite                             | `sqlite:///./data/receipt_reader.db` |
+| `UPLOAD_DIR`            | Directorio de uploads                     | `data/uploads`                       |
+| `MAX_UPLOAD_SIZE_BYTES` | Límite de tamaño                          | `10485760` (10 MB)                   |
+| `TOTALS_TOLERANCE_EUR`  | Tolerancia en totales                     | `0.02`                               |
+| `LINE_TOLERANCE_EUR`    | Tolerancia por línea                      | `0.01`                               |
 
 ## Privacidad
 
