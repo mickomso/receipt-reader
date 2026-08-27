@@ -174,7 +174,10 @@
     gap: 1rem;
     margin-bottom: .5rem;
   }
-  h1 { margin: 0; font-size: 1.5rem; }
+h1, h2 {
+    font-family: 'Montserrat', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+h1 { margin: 0; font-size: 1.5rem; }
   h2 { margin: 0; font-size: 1.1rem; }
   .meta {
     display: flex;

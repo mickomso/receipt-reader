@@ -70,13 +70,14 @@
 {/if}
 
 <style>
+  .totals-card { padding: 1.5rem; }
   h3 { margin: 0 0 1rem; font-size: 1rem; }
   .totals-table { width: auto; min-width: 280px; }
   .totals-table td { padding: .35rem .75rem; }
   .num { text-align: right; }
   .total-row td { border-top: 2px solid var(--color-border); padding-top: .6rem; }
   .diff-warn { color: var(--color-danger); font-weight: 700; }
-  .mismatch-row td { background: #fff7ed; }
+  .mismatch-row td { background: rgba(245, 158, 11, 0.12); }
   .mismatch { margin-bottom: 1rem; }
   .diff-label { color: var(--color-muted); font-size: .85rem; }
 </style>

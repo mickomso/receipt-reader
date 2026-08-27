@@ -52,7 +52,7 @@ def build_graph(extractor: BaseExtractor, repository) -> StateGraph:
     """Build and compile the receipt processing workflow.
 
     Args:
-        extractor: Concrete BaseExtractor implementation (Gemini or fake).
+        extractor: Concrete BaseExtractor implementation (LLM or fake).
         repository: ReceiptRepository instance for persistence.
 
     Returns:

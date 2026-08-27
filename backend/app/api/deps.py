@@ -22,9 +22,9 @@ def get_extractor() -> BaseExtractor:
 
         return GrokExtractor()
 
-    from app.workflow.gemini_extractor import GeminiExtractor
+    from app.workflow.llm_extractor import LLMExtractor
 
-    return GeminiExtractor()
+    return LLMExtractor()
 
 
 def get_receipt_service(

@@ -11,6 +11,7 @@ from app.api.schemas import (
     ConfirmRequest,
     ReceiptDetailOut,
     ReceiptItemOut,
+    ReceiptListItemOut,
     ReceiptListOut,
     ReceiptOut,
     ReceiptPatch,
@@ -103,7 +104,7 @@ async def upload_receipt(
 @router.post(
     "/{receipt_id}/process",
     response_model=ReceiptDetailOut,
-    summary="Procesar ticket con Gemini",
+    summary="Procesar ticket con LLM",
     responses={
         200: {"description": "Extracción completada"},
         404: {"description": "Ticket no encontrado"},
@@ -160,7 +161,7 @@ def list_receipts(
 ) -> ReceiptListOut:
     receipts = svc.list_receipts(skip=skip, limit=limit)
     items_out = [
-        ReceiptOut(
+        ReceiptListItemOut(
             id=str(r.id),
             filename=r.filename,
             status=r.status.value,
@@ -173,6 +174,7 @@ def list_receipts(
             error_message=r.error_message,
             created_at=r.created_at,
             updated_at=r.updated_at,
+            totals=_totals_to_out(svc.get_totals(str(r.id))),
         )
         for r in receipts
     ]
@@ -212,6 +214,20 @@ def get_receipt(
         items=[_item_to_out(i) for i in items],
         totals=_totals_to_out(totals),
     )
+
+
+@router.delete(
+    "/{receipt_id}",
+    status_code=204,
+    summary="Eliminar un ticket",
+    responses={404: {"description": "Ticket no encontrado"}},
+)
+def delete_receipt(
+    receipt_id: str,
+    svc: ReceiptService = Depends(get_receipt_service),
+) -> None:
+    if not svc.delete_receipt(receipt_id):
+        raise HTTPException(status_code=404, detail="Ticket no encontrado")
 
 
 @router.patch(

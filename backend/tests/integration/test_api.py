@@ -105,6 +105,22 @@ class TestListAndDetailEndpoints:
         assert resp.status_code == 200
         assert len(resp.json()["items"]) >= 1
 
+    def test_delete_receipt(self, client: TestClient):
+        upload_resp = client.post(
+            "/api/v1/receipts",
+            files={"file": ("ticket.jpg", MINIMAL_JPEG, "image/jpeg")},
+        )
+        receipt_id = upload_resp.json()["id"]
+
+        resp = client.delete(f"/api/v1/receipts/{receipt_id}")
+
+        assert resp.status_code == 204
+        assert client.get(f"/api/v1/receipts/{receipt_id}").status_code == 404
+
+    def test_delete_nonexistent_receipt(self, client: TestClient):
+        resp = client.delete("/api/v1/receipts/does-not-exist")
+        assert resp.status_code == 404
+
     def test_get_receipt_detail(self, client: TestClient):
         upload_resp = client.post(
             "/api/v1/receipts",
