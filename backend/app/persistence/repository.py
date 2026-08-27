@@ -115,6 +115,15 @@ class ReceiptRepository:
         orm = self._db.get(ReceiptORM, receipt_id)
         return _receipt_to_domain(orm) if orm else None
 
+    def delete(self, receipt_id: str) -> DomainReceipt | None:
+        orm = self._db.get(ReceiptORM, receipt_id)
+        if not orm:
+            return None
+        receipt = _receipt_to_domain(orm)
+        self._db.delete(orm)
+        self._db.commit()
+        return receipt
+
     def list_all(self, skip: int = 0, limit: int = 50) -> list[DomainReceipt]:
         rows = (
             self._db.query(ReceiptORM)

@@ -149,6 +149,6 @@
   .fail { color: var(--color-danger); font-weight: 700; }
   .na   { color: var(--color-muted); }
 
-  tr.needs-review td { background: #fff7ed; }
+  tr.needs-review td { background: rgba(245, 158, 11, 0.12); }
   tr.line-invalid td { border-left: 3px solid var(--color-danger); }
 </style>
