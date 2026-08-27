@@ -469,24 +469,32 @@
   }
 
   .tickets-table :global(.badge) {
-    padding: 0;
-    border-radius: 0;
-    background: transparent;
+    min-height: 26px;
+    padding: 4px 9px;
+    border: 1px solid currentColor;
+    border-radius: 999px;
     font-size: 0.72rem;
     font-weight: 600;
     letter-spacing: 0.02em;
     text-transform: none;
   }
 
-  .tickets-table :global(.badge)::before {
-    display: inline-block;
-    width: 6px;
-    height: 6px;
-    margin-right: 7px;
-    border-radius: 50%;
-    background: currentColor;
-    content: '';
-    vertical-align: 1px;
+  .tickets-table :global(.badge-uploaded) {
+    background: rgba(56, 189, 248, 0.12);
+  }
+
+  .tickets-table :global(.badge-processing),
+  .tickets-table :global(.badge-needs_review) {
+    background: rgba(245, 158, 11, 0.12);
+  }
+
+  .tickets-table :global(.badge-extracted),
+  .tickets-table :global(.badge-confirmed) {
+    background: rgba(34, 197, 94, 0.12);
+  }
+
+  .tickets-table :global(.badge-failed) {
+    background: rgba(239, 68, 68, 0.12);
   }
 
   /* Columnas */

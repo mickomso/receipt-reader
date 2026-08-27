@@ -1,7 +1,7 @@
 """Grok multimodal extractor using LangChain + xAI OpenAI-compatible API.
 
-Intended for development/testing only.  Switch to GeminiExtractor for
-production by setting EXTRACTOR_BACKEND=gemini in .env.
+ Intended for development/testing only.  Switch to the LLM extractor for
+ production by setting EXTRACTOR_BACKEND=llm in .env.
 """
 
 from __future__ import annotations

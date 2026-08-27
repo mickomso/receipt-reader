@@ -3,7 +3,7 @@ import * as fs from "fs";
 import * as path from "path";
 
 // These E2E tests require both backend and frontend to be running.
-// Backend: http://localhost:8000 (with FAKE_EXTRACTOR=true or real Gemini key)
+// Backend: http://localhost:8000 (with FAKE_EXTRACTOR=true or a real LLM key)
 // Frontend: http://localhost:5173
 
 test.describe("Upload flow", () => {

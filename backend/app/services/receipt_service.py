@@ -70,7 +70,7 @@ class ReceiptService:
             receipt_id=receipt_id,
             started_at=datetime.now(UTC),
             status="running",
-            model_name="gemini",
+            model_name="llm",
         )
         self._repo.save_job(job)
 

@@ -272,7 +272,7 @@ Configuration is loaded through environment variables.
 | ----------------------- | -------------------------------------- | ------------------------------------ |
 | `XAI_API_KEY`           | xAI API key                            | Required                             |
 | `GROK_MODEL`            | xAI model used for extraction          | `grok-4.5`                           |
-| `EXTRACTOR_BACKEND`     | Extraction backend: `grok` or `gemini` | `grok`                               |
+| `EXTRACTOR_BACKEND`     | Extraction backend for the LLM      | `llm`                                |
 | `DATABASE_URL`          | Database connection URL                | `sqlite:///./data/receipt_reader.db` |
 | `UPLOAD_DIR`            | Directory for uploaded images          | `data/uploads`                       |
 | `MAX_UPLOAD_SIZE_BYTES` | Maximum upload size                    | `10485760`                           |

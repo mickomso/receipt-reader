@@ -104,7 +104,7 @@ async def upload_receipt(
 @router.post(
     "/{receipt_id}/process",
     response_model=ReceiptDetailOut,
-    summary="Procesar ticket con Gemini",
+    summary="Procesar ticket con LLM",
     responses={
         200: {"description": "Extracción completada"},
         404: {"description": "Ticket no encontrado"},

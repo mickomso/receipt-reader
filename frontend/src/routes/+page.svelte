@@ -44,7 +44,7 @@
   {#if processing}
     <div class="processing-overlay card" data-od-id="estado-procesando">
       <div class="spinner"></div>
-      <p>Analizando tu ticket con Gemini…</p>
+      <p>Analizando tu ticket con un LLM…</p>
     </div>
   {:else}
     <UploadForm on:uploaded={onUploaded} />

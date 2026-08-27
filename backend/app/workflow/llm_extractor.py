@@ -1,4 +1,4 @@
-"""Gemini multimodal extractor using LangChain with_structured_output."""
+"""LLM multimodal extractor using LangChain with_structured_output."""
 
 from __future__ import annotations
 
@@ -31,13 +31,13 @@ REGLAS ESTRICTAS:
 """
 
 
-class GeminiExtractor(BaseExtractor):
-    """Extracts structured receipt data using Google Gemini via LangChain."""
+class LLMExtractor(BaseExtractor):
+    """Extracts structured receipt data using an LLM via LangChain."""
 
     def __init__(self) -> None:
         llm = ChatGoogleGenerativeAI(
-            model=settings.gemini_model,
-            temperature=settings.gemini_temperature,
+            model=settings.llm_model,
+            temperature=settings.llm_temperature,
             google_api_key=settings.google_api_key,
         )
         self._chain = llm.with_structured_output(ReceiptExtractionSchema)
@@ -60,6 +60,6 @@ class GeminiExtractor(BaseExtractor):
                 },
             ]
         )
-        logger.info("Calling Gemini for extraction (mime=%s, size=%d)", mime_type, len(image_bytes))
+        logger.info("Calling LLM for extraction (mime=%s, size=%d)", mime_type, len(image_bytes))
         result = self._chain.invoke([message])
         return result
