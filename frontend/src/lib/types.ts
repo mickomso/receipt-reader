@@ -1,12 +1,12 @@
 // TypeScript types mirroring the backend API contract
 
 export type ReceiptStatus =
-  | 'uploaded'
-  | 'processing'
-  | 'extracted'
-  | 'needs_review'
-  | 'confirmed'
-  | 'failed';
+  | "uploaded"
+  | "processing"
+  | "extracted"
+  | "needs_review"
+  | "confirmed"
+  | "failed";
 
 export interface TaxDetail {
   name: string | null;
@@ -56,13 +56,17 @@ export interface Receipt {
   updated_at: string;
 }
 
+export interface ReceiptListItem extends Receipt {
+  totals: ReceiptTotals | null;
+}
+
 export interface ReceiptDetail extends Receipt {
   items: ReceiptItem[];
   totals: ReceiptTotals | null;
 }
 
 export interface ReceiptListResponse {
-  items: Receipt[];
+  items: ReceiptListItem[];
   total: number;
   skip: number;
   limit: number;

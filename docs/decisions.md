@@ -10,7 +10,7 @@ FastAPI + Python 3.12.
 
 ## Modelo
 
-Gemini multimodal a través de LangChain.
+LLM multimodal a través de LangChain.
 
 ## Salida
 

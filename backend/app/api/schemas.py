@@ -71,6 +71,10 @@ class ReceiptOut(BaseModel):
     model_config = {"from_attributes": True}
 
 
+class ReceiptListItemOut(ReceiptOut):
+    totals: ReceiptTotalsOut | None = None
+
+
 class ReceiptDetailOut(ReceiptOut):
     items: list[ReceiptItemOut] = []
     totals: ReceiptTotalsOut | None = None
@@ -112,7 +116,7 @@ class ConfirmRequest(BaseModel):
 # ---------------------------------------------------------------------------
 
 class ReceiptListOut(BaseModel):
-    items: list[ReceiptOut]
+    items: list[ReceiptListItemOut]
     total: int
     skip: int
     limit: int

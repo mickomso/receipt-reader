@@ -1,8 +1,8 @@
 """Abstract base for receipt extractors.
 
 Lives in the workflow package so nodes depend on an interface, not a
-concrete LLM implementation.  The concrete GeminiExtractor lives in
-app/workflow/gemini_extractor.py and can be swapped for a fake in tests.
+ concrete LLM implementation.  The concrete LLM extractor lives in
+  app/workflow/llm_extractor.py and can be swapped for a fake in tests.
 """
 
 from __future__ import annotations

@@ -39,17 +39,12 @@ class Settings(BaseSettings):
         default=["image/jpeg", "image/png", "image/webp"]
     )
 
-    # Google / Gemini
-    google_api_key: str = ""
-    gemini_model: str = "gemini-3.6-flash"
-    gemini_temperature: float = 0.0
-
     # xAI / Grok  (extractor_backend="grok" para usar durante desarrollo)
     xai_api_key: str = ""
     grok_model: str = "grok-4.5"
 
-    # Selector de extractor: "gemini" | "grok"
-    extractor_backend: str = "gemini"
+    # Selector de extractor: "llm"
+    extractor_backend: str = "llm"
 
     # Validation
     totals_tolerance_eur: float = 0.02

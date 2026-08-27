@@ -8,7 +8,7 @@ Construir un MVP web para leer tickets de supermercado.
 
 - Frontend: SvelteKit + TypeScript.
 - Backend: FastAPI + Python 3.12.
-- IA: Gemini multimodal mediante LangChain.
+- IA: LLM multimodal mediante LangChain.
 - Workflow: LangGraph.
 - Validación: Pydantic.
 - Base de datos MVP: SQLite.
