@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import logging
 from datetime import UTC, datetime
+from pathlib import Path
 from uuid import uuid4
 
 from sqlalchemy.orm import Session
@@ -31,6 +32,12 @@ class ReceiptService:
 
     def get_receipt(self, receipt_id: str) -> DomainReceipt | None:
         return self._repo.get(receipt_id)
+
+    def delete_receipt(self, receipt_id: str) -> DomainReceipt | None:
+        receipt = self._repo.delete(receipt_id)
+        if receipt:
+            Path(receipt.file_path).unlink(missing_ok=True)
+        return receipt
 
     def list_receipts(self, skip: int = 0, limit: int = 50) -> list[DomainReceipt]:
         return self._repo.list_all(skip, limit)
